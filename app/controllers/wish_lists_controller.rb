@@ -5,18 +5,17 @@ class WishListsController < ApplicationController
   def index
     @wish_lists = WishList.all
 
-    render json: @wish_lists
+    render json: @wish_lists.as_json(include: {wish_items: {only: [:id, :name, :color, :height, :weight, :link, :description, :price]}})
   end
 
   # GET /wish_lists/1
   def show
-    render json: @wish_list
+    render json: @wish_list.as_json(include: {wish_items: {only: [:id, :name, :color, :height, :weight, :link, :description, :price]}})
   end
 
   # POST /wish_lists
   def create
     @wish_list = WishList.new(wish_list_params)
-
     if @wish_list.save
       render json: @wish_list, status: :created, location: @wish_list
     else
@@ -46,6 +45,6 @@ class WishListsController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def wish_list_params
-      params.require(:wish_list).permit(:title, :item_count, :delivery_date)
+      params.require(:wish_list).permit(:title, :item_count, :delivery_date, wish_items_attributes: [:name, :color, :height, :weight, :link, :description, :price])
     end
 end

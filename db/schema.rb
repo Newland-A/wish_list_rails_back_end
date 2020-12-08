@@ -16,7 +16,7 @@ ActiveRecord::Schema.define(version: 2020_12_07_124735) do
   enable_extension "plpgsql"
 
   create_table "wish_items", force: :cascade do |t|
-    t.string "name" 
+    t.string "name"
     t.string "color"
     t.string "height"
     t.string "weight"
