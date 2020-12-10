@@ -15,6 +15,7 @@ class WishItemsController < ApplicationController
 
   # POST /wish_items
   def create
+    # binding.pry
     @wish_item = WishItem.new(wish_item_params)
 
     if @wish_item.save
