@@ -4,13 +4,14 @@ class WishListsController < ApplicationController
   # GET /wish_lists
   def index
     @wish_lists = WishList.all
-
-    render json: @wish_lists.as_json(include: {wish_items: {only: [:id, :name, :color, :height, :weight, :link, :description, :price]}})
+    # binding.pry
+    render json: @wish_lists.as_json(include: {wish_items: {only: [:id, :name, :color, :height, :weight, :link, :description, :price, :wish_list_id]}})
   end
 
   # GET /wish_lists/1
   def show
-    render json: @wish_list.as_json(include: {wish_items: {only: [:id, :name, :color, :height, :weight, :link, :description, :price]}})
+    # binding.pry
+    render json: @wish_list.as_json(include: {wish_items: {only: [:id, :name, :color, :height, :weight, :link, :description, :price, :wish_list_id]}})
   end
 
   # POST /wish_lists
@@ -35,6 +36,8 @@ class WishListsController < ApplicationController
   # DELETE /wish_lists/1
   def destroy
     @wish_list.destroy
+    # binding.pry
+    # redirect_to wish_lists_path
   end
 
   private
@@ -45,6 +48,6 @@ class WishListsController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def wish_list_params
-      params.require(:wish_list).permit(:title, :item_count, :delivery_date, wish_items_attributes: [:name, :color, :height, :weight, :link, :description, :price])
+      params.require(:wish_list).permit(:title, :item_count, :delivery_date, wish_items_attributes: [:id, :name, :color, :height, :weight, :link, :description, :price, :wish_list_id])
     end
 end
