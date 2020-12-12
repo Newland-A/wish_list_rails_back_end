@@ -37,6 +37,7 @@ class WishItemsController < ApplicationController
   # DELETE /wish_items/1
   def destroy
     @wish_item.destroy
+    binding.pry
   end
 
   private
