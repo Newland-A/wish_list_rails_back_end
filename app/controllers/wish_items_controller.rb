@@ -15,11 +15,12 @@ class WishItemsController < ApplicationController
 
   # POST /wish_items
   def create
-    # binding.pry
+    
     @wish_item = WishItem.new(wish_item_params)
-
+binding.pry
     if @wish_item.save
       render json: @wish_item, status: :created, location: @wish_item
+      flash[:notice] = "Item successfully created"
     else
       render json: @wish_item.errors, status: :unprocessable_entity
     end
@@ -37,7 +38,7 @@ class WishItemsController < ApplicationController
   # DELETE /wish_items/1
   def destroy
     @wish_item.destroy
-    binding.pry
+    # binding.pry
   end
 
   private

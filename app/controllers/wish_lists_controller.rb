@@ -17,6 +17,7 @@ class WishListsController < ApplicationController
   # POST /wish_lists
   def create
     @wish_list = WishList.new(wish_list_params)
+    binding.pry
     if @wish_list.save
       render json: @wish_list, status: :created, location: @wish_list
     else
