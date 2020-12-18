@@ -4,20 +4,17 @@ class WishListsController < ApplicationController
   # GET /wish_lists
   def index
     @wish_lists = WishList.all
-    # binding.pry
     render json: @wish_lists.as_json(include: {wish_items: {only: [:id, :name, :color, :height, :weight, :link, :description, :price, :wish_list_id]}})
   end
 
   # GET /wish_lists/1
   def show
-    # binding.pry
     render json: @wish_list.as_json(include: {wish_items: {only: [:id, :name, :color, :height, :weight, :link, :description, :price, :wish_list_id]}})
   end
 
   # POST /wish_lists
   def create
     @wish_list = WishList.new(wish_list_params)
-    binding.pry
     if @wish_list.save
       render json: @wish_list, status: :created, location: @wish_list
     else
@@ -37,8 +34,6 @@ class WishListsController < ApplicationController
   # DELETE /wish_lists/1
   def destroy
     @wish_list.destroy
-    # binding.pry
-    # redirect_to wish_lists_path
   end
 
   private
