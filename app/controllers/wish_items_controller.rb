@@ -17,7 +17,6 @@ class WishItemsController < ApplicationController
   def create
     
     @wish_item = WishItem.new(wish_item_params)
-binding.pry
     if @wish_item.save
       render json: @wish_item, status: :created, location: @wish_item
       flash[:notice] = "Item successfully created"
